@@ -15,11 +15,11 @@ namespace Engine.Models
         public int MaxHitPoints { get; private set; }
         public int HitPoints {
             get { return _hitPoints; }
-            private set
+            set
             {
                 _hitPoints = value;
                 OnPropertyChanged(nameof(HitPoints));
-            } 
+            }
         }
 
         public int RewardExperiencePoints { get; private set; }

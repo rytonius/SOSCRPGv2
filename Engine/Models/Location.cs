@@ -39,7 +39,7 @@ namespace Engine.Models
             }
         }
 
-        public Monster GetMonter()
+        public Monster GetMonster()
         {
             if (!MonsterEncounterHere.Any())
             {

@@ -19,6 +19,9 @@ namespace Engine.Factories
             newWorld.AddLocation(xCoordinate: 0, yCoordinate: -2, zCoordinate: 0, name: "Forest Near Home",
                                 description: "Area Next to your home, good place to hunt and train",
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/ForestAreaHome.jpg");
+            // monster spawn for forest near home
+            newWorld.LocationAt(0, -2, 0).AddMonster(1, 100);
+
             newWorld.AddLocation(xCoordinate: 0, yCoordinate: 0, zCoordinate: 0, name: "Mountain Side",
                                 description: "Center location of Area, leads to city north or farmland to west.",
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/MountainSide.jpg");
@@ -31,10 +34,13 @@ namespace Engine.Factories
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/FarmHouse.jpg");
             // farmer house quest kill snakes
             newWorld.LocationAt(-2, 0, 0).QuestsAvailableHere.Add(QuestFactory.GetQuestByID(1));
+ 
 
             newWorld.AddLocation(xCoordinate: -3, yCoordinate: 0, zCoordinate: 0, name: "Farmer's Field 2",
                                 description: "Monsters keep stealing Farmer Grant's Grains! Get um",
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/FarmField2.jpg");
+            // Snake attack
+            newWorld.LocationAt(-3, 0, 0).AddMonster(2, 100);
             // City Section
             newWorld.AddLocation(xCoordinate: 0, yCoordinate: 1, zCoordinate: 0, name: "Entrance Gate",
                                 description: "Enter the City from the south side",
@@ -63,9 +69,11 @@ namespace Engine.Factories
                                 description: "Herbalist sells healing items",
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/HerbalistHut.jpg");
             // spider forest 
-            newWorld.AddLocation(xCoordinate: -0, yCoordinate: 5, zCoordinate: 0, name: "Spider Forest Entrance",
+            newWorld.AddLocation(xCoordinate: 0, yCoordinate: 5, zCoordinate: 0, name: "Spider Forest Entrance",
                                 description: "Entrance to spider forest, make sure you are ready before entering",
                                 imageName: "pack://application:,,,/Engine;component/Images/Locations/SpiderForestEntrance.jpg");
+            newWorld.LocationAt(0, 5, 0).AddMonster(3, 90);
+            newWorld.LocationAt(0, 5, 0).AddMonster(4, 10);
 
 
             return newWorld;

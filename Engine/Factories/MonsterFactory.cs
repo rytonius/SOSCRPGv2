@@ -14,12 +14,12 @@ namespace Engine.Factories
             switch (monsterID)
             {
                 case 1:
-                    Monster rat = new Monster(name: "this isn't a rat", imageName: "Enemy1.jpg", maxHitPoints: 5, rewardExperiencePoints: 4, rewardGold: 1);
+                    Monster rat = new Monster(name: "this isn't a rat", imageName: "Enemy1.png", maxHitPoints: 5, rewardExperiencePoints: 4, rewardGold: 1);
                     AddLootItem(rat, 9001, 75);
                     AddLootItem(rat, 9002, 25);
                     return rat;
                 case 2:
-                    Monster snake = new Monster(name: "Solid Snake", imageName: "Snake.jpg", maxHitPoints: 8, rewardExperiencePoints: 8, rewardGold: 2);
+                    Monster snake = new Monster(name: "Solid Snake", imageName: "Snake.png", maxHitPoints: 8, rewardExperiencePoints: 8, rewardGold: 2);
                     AddLootItem(snake, 9003, 75);
                     AddLootItem(snake, 9004, 25);
                     return snake;

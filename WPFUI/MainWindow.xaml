@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFUI" xmlns:sys="clr-namespace:System;assembly=netstandard"
+        xmlns:viewModels="clr-namespace:Engine.ViewModels;assembly=Engine"
+        d:DataContext="{d:DesignInstance viewModels:GameSession}"
         mc:Ignorable="d"
-        Title="Crummy but Awesome RPG" Height="880" Width="1080"
+        Title="Crummy but Awesome RPG" Height="900" Width="1280"
         KeyDown="Window_KeyDown">
        
     <Window.Resources>
@@ -22,8 +24,8 @@
             <Setter Property="FontSize" Value="{Binding FontSizeLabel}"/>
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
         </Style>
-
         <local:IntToStringConverter x:Key="IntToStringConverterKey"/>
+        
     </Window.Resources>
     <!--
     <Window.InputBindings>
@@ -49,10 +51,10 @@
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Put something here later?" HorizontalAlignment="Center"/>
         <Button Name="FontHigher" Grid.Column="1" Width="60" HorizontalAlignment="Right" Click="FontSizeMethod">Font +</Button>
         <Button Name="FontLower" Grid.Column="1" Width="60" HorizontalAlignment="Right" Margin="0,0,60,0" Click="FontSizeMethod">Font -</Button>
-        
-
+       
         <!--Player Area top Left-->
         <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource JEWEL}">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -78,6 +80,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <!-- Player Stats Left Side-->
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Player" HorizontalContentAlignment="Center" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Name:" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.Name}" Foreground="{StaticResource ALICEBLUE}"/>
@@ -133,16 +136,17 @@
                 </Grid.RowDefinitions>
                 <Label Foreground="LightGreen">Top Center</Label>
                 <Label Grid.Row="1" Foreground="LightGreen">Bottom Center</Label>
-                <Border BorderBrush="{StaticResource FUSCHIA}" Grid.RowSpan="2" BorderThickness="4,0"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" Grid.RowSpan="2" BorderThickness="3,0"/>
                 <GridSplitter VerticalAlignment="bottom" HorizontalAlignment="Stretch" Background="{StaticResource FUSCHIA}" ResizeBehavior="BasedOnAlignment" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" ResizeDirection="Rows" Height="3"/>
             </Grid>
-            <!-- This is center Right-->
+            <!-- Top right section with location and monster blue area Right-->
             <Grid Grid.Column="1" Background="{StaticResource JEWEL}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 2, 0, 2">
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 2">
+                    <!-- Location at the top right-->
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -150,16 +154,34 @@
                             <RowDefinition Height="*"/>
 
                         </Grid.RowDefinitions>
-                        <Label x:Name="LocationName" Grid.Row="0" Content="{Binding CurrentLocation.Name , FallbackValue='Name'}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code"></Label>
-                        <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="512" MinWidth="128" MaxHeight="512" MinHeight="128" Source="{Binding CurrentLocation.ImageName}" d:Source="pack://application:,,,/Engine;component/Images/Monsters/Cult_Abomination1.png" Stretch="Uniform" StretchDirection="Both" Margin="4,0,4,0"/>
+                        <Label x:Name="LocationName" Grid.Row="0" Content="{Binding CurrentLocation.Name , FallbackValue='Name'}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code"/>
+                        <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="512" MinWidth="128" MaxHeight="512" MinHeight="128" Source="{Binding CurrentLocation.ImageName}" d:Source="pack://application:,,,/Engine;component/Images/Locations/home.jpg" Stretch="Uniform" StretchDirection="Both" Margin="4,0,4,0"/>
+                        <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" MaxWidth="512" MinWidth="128" MaxHeight="512" MinHeight="128" Source="{Binding CurrentMonster.ImageName}" d:Source="pack://application:,,,/Engine;component/Images/Monsters/Snake.png" Stretch="Uniform"  Margin="0,0,0,0"/>
                         <Label Grid.Row="2" HorizontalAlignment="Center" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code">
                             <TextBlock TextWrapping="Wrap" Text="{Binding CurrentLocation.Description}" d:Text="Description" FontSize="{Binding FontSizeLabel}"/>
                         </Label>
                     </Grid>
                 </Border>
-            </Grid>
+                <!-- Monster Information-->
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0,2,0,0">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
- 
+                        <Label Content="{Binding CurrentMonster.Name}" d:Content="Monster Name" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code"/>
+                        <StackPanel Grid.Row="1" Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Left" Orientation="Horizontal">
+                            <Label FontFamily="Cascadia Code" Foreground="{StaticResource ALICEBLUE}">
+                                <Span>Current HP:
+                                    <Run Text="{Binding CurrentMonster.HitPoints}" d:Text="32"></Run>
+                                </Span>
+                            </Label>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
         <!--Inventory/ Quest bottom left-->
         <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource FUSCHIA}">
@@ -184,7 +206,7 @@
 
 
                 </TabItem>
-
+        <!--quest tab-->
                 <TabItem Header="Quest">
                     <DataGrid ItemsSource="{Binding CurrentPlayer.Quests}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" HeadersVisibility="Column">
                         <DataGrid.RowStyle>
@@ -213,7 +235,7 @@
             </Grid.RowDefinitions>
             <Button Grid.Row="2" Content="Gain 10 Xp" Click="XPButtonBase_OnClick"/>
         </Grid>
-        <!--Combat movement bottom Right-->
+        <!--movement bottom Right-->
         <Grid Grid.Row="2" Grid.Column="1" Background="{StaticResource STARK}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -222,7 +244,7 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="{StaticResource JEWEL}" BorderThickness="0, 0, 0, 0" />
+            <Border BorderBrush="{StaticResource FUSCHIA}" Grid.Column="0"  BorderThickness="3,0"/>
         <!--Direction movement-->
             <Grid x:Name="DirectionGrid" Grid.Column="1" TextBlock.FontSize="14" TextBlock.FontStyle="Italic">
                 
@@ -279,15 +301,15 @@
                     <Span FontWeight="Normal">z: <Run FontWeight="Bold" Text="{Binding CurrentLocation.ZCoordinate}"/></Span>
                 </TextBlock>
                 <!-- this is so dumb, has to be a better way to do this -->
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="0" Grid.Row="0" CornerRadius="0, 0, 25, 0"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="1" Grid.Row="0" CornerRadius="0, 0, 25, 25"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="2" Grid.Row="0" CornerRadius="0, 0, 0, 25" Background="{StaticResource FUSCHIA}"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="0" Grid.Row="1" CornerRadius="0, 25, 25, 0"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 0, 1, 1" Grid.Column="0" Grid.Row="0" CornerRadius="0, 0, 25, 0"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 0, 0, 1" Grid.Column="1" Grid.Row="0" CornerRadius="0, 0, 25, 25"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0" Grid.Column="2" Grid.Row="0" CornerRadius="0, 0, 0, 25" Background="{StaticResource FUSCHIA}"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 1, 1, 1" Grid.Column="0" Grid.Row="1" CornerRadius="0, 25, 25, 0"/>
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="1" Grid.Row="1" CornerRadius="25"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="2" Grid.Row="1" CornerRadius="25, 0,0, 25"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="0" Grid.Row="2" CornerRadius="0, 25,0, 0"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="1" Grid.Row="2" CornerRadius="25, 25,0, 0"/>
-                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1" Grid.Column="2" Grid.Row="2" CornerRadius="25, 0,0, 0" Background="{StaticResource FUSCHIA}"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 0, 0, 0" Grid.Column="2" Grid.Row="1" CornerRadius="25, 0,0, 25"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 1, 1, 0" Grid.Column="0" Grid.Row="2" CornerRadius="0, 25,0, 0"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 1, 0, 0" Grid.Column="1" Grid.Row="2" CornerRadius="25, 25,0, 0"/>
+                <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0" Grid.Column="2" Grid.Row="2" CornerRadius="25, 0,0, 0" Background="{StaticResource FUSCHIA}"/>
                 
                 
             </Grid>

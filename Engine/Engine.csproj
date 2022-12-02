@@ -58,7 +58,9 @@
     <None Remove="Images\Monsters\Cultist_leader.png" />
     <None Remove="Images\Monsters\Cult_Abomination1.png" />
     <None Remove="Images\Monsters\Enemy1.jpg" />
+    <None Remove="Images\Monsters\Enemy1.png" />
     <None Remove="Images\Monsters\snake.jpg" />
+    <None Remove="Images\Monsters\snake.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,10 +127,10 @@
     <Resource Include="Images\Monsters\Cultist_leader.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Monsters\Enemy1.jpg">
+    <Resource Include="Images\Monsters\Enemy1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Monsters\snake.jpg">
+    <Resource Include="Images\Monsters\Snake.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
