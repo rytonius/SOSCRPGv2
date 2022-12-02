@@ -1,0 +1,136 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Locations\01352-182496955-general store, shop, Merchant in his store selling things, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lotr game de.png" />
+    <None Remove="Images\Locations\01354-140683998-general store, shop, Merchant, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lotr game design fanart by concept art,.png" />
+    <None Remove="Images\Locations\01358-140684002-general store, shop, Merchant, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lotr game design fanart by concept art,.png" />
+    <None Remove="Images\Locations\01361-140684005-general store, shop, Merchant, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lotr game design fanart by concept art,.png" />
+    <None Remove="Images\Locations\01370-4180662410-masterpiece, hires, townsquare in a sunny day, water fountain, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of.png" />
+    <None Remove="Images\Locations\01372-4180662412-masterpiece, hires, townsquare in a sunny day, water fountain, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of.png" />
+    <None Remove="Images\Locations\01381-1179896722-%28 masterpiece%29, %28high quality%29, hires, townsquare in a sunny day, water fountain, ultra detailed fantasy, elden ring, realistic,.png" />
+    <None Remove="Images\Locations\01382-3246025201-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings game design fa.png" />
+    <None Remove="Images\Locations\01383-3246025202-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings game design fa.png" />
+    <None Remove="Images\Locations\01385-3246025204-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings game design fa.png" />
+    <None Remove="Images\Locations\01390-3090278014-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01392-3090278016-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01394-1614429673-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01395-1614429674-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01396-1614429675-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01397-1614429676-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, elden ring, realistic, dnd, rpg, lord of the rings,  art by  greg.png" />
+    <None Remove="Images\Locations\01398-673103535-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01406-3450720451-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01407-3450720452-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01408-3450720453-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01409-3450720454-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01414-2115040941-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01423-3882974105-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01425-3882974107-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01436-171844819-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01441-1938766696-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\01445-2443626457-%28 masterpiece%29, %28high quality%29, hires, ultra detailed fantasy, realistic, dnd, rpg, lord of the rings,  art by  greg rutkowski,.png" />
+    <None Remove="Images\Locations\DeathTower.jpg" />
+    <None Remove="Images\Locations\EntranceGate.jpg" />
+    <None Remove="Images\Locations\ExitGate.jpg" />
+    <None Remove="Images\Locations\FarmField.jpg" />
+    <None Remove="Images\Locations\FarmField2.jpg" />
+    <None Remove="Images\Locations\FarmHouse.jpg" />
+    <None Remove="Images\Locations\ForestAreaHome.jpg" />
+    <None Remove="Images\Locations\GardenHerbalist2.jpg" />
+    <None Remove="Images\Locations\HerbalistGarden.jpg" />
+    <None Remove="Images\Locations\HerbalistHut.jpg" />
+    <None Remove="Images\Locations\home.jpg" />
+    <None Remove="Images\Locations\home.png" />
+    <None Remove="Images\Locations\MountainSide.jpg" />
+    <None Remove="Images\Locations\RoadFarmLand.jpg" />
+    <None Remove="Images\Locations\SpiderForestEnd.jpg" />
+    <None Remove="Images\Locations\SpiderForestEntrance.jpg" />
+    <None Remove="Images\Locations\SpiderForrestMiddle.jpg" />
+    <None Remove="Images\Locations\TownSquare.jpg" />
+    <None Remove="Images\Locations\TradingShop.jpg" />
+    <None Remove="Images\Locations\TradingShopEntrance.jpg" />
+    <None Remove="Images\Monsters\Cultist_leader.png" />
+    <None Remove="Images\Monsters\Cult_Abomination1.png" />
+    <None Remove="Images\Monsters\Enemy1.jpg" />
+    <None Remove="Images\Monsters\snake.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Locations\DeathTower.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\EntranceGate.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\ExitGate.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\FarmField.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\FarmField2.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\FarmHouse.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\ForestAreaHome.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\GardenHerbalist2.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\HerbalistGarden.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\HerbalistHut.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\home.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\MountainSide.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\RoadFarmLand.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\SpiderForestEnd.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\SpiderForestEntrance.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\SpiderForrestMiddle.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\TownSquare.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\TradingShop.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Locations\TradingShopEntrance.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Monsters\Cult_Abomination1.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Monsters\Cultist_leader.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Monsters\Enemy1.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Monsters\snake.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>
