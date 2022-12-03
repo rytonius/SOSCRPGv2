@@ -20,7 +20,7 @@ namespace Engine.ViewModels
         public Player CurrentPlayer { get; set; }
         private Monster _currentMonster;
         public bool HasMonster => CurrentMonster != null;
-        public Location CurrentLocation
+        public Location? CurrentLocation
         {
             get => _currentLocation;
             set {
