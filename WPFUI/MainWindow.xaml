@@ -36,8 +36,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="512"/>
-            <RowDefinition Height="*" MinHeight="175"/>
+            <RowDefinition Height="Auto" MinHeight="640" MaxHeight="1225"/>
+            <RowDefinition Height="*" MinHeight="225"/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -45,6 +45,7 @@
             <ColumnDefinition Width="4*"/>
 
         </Grid.ColumnDefinitions>
+        
         <!--<GridSplitter VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Background="Beige" ResizeBehavior="PreviousAndNext" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" ResizeDirection="Rows" Height="25"/>-->
         <!--Menu Top bar-->
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Menu" VerticalAlignment="Center" Margin="4,0,0,0" Background="{StaticResource STARK}"/>
@@ -81,6 +82,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!-- Player Stats Left Side-->
+            
             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Player" HorizontalContentAlignment="Center" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="1" Grid.Column="0" Content="Name:" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="1" Grid.Column="1" Content="{Binding CurrentPlayer.Name}" Foreground="{StaticResource ALICEBLUE}"/>
@@ -115,6 +117,7 @@
             <Label Grid.Row="16" Grid.Column="0" Content="Accuracy:" Foreground="{StaticResource ALICEBLUE}" ToolTip="Accuracy = Dex + level, D20 + Accurace for roll ie 8 would mean 8 + d20 so 8-28 chance.  Crit happens no matter what on d20"/>
             <Label Grid.Row="16" Grid.Column="1" Content="{Binding CurrentPlayer.BonusAccuracy, Converter={StaticResource IntToStringConverterKey}}" Foreground="{StaticResource ALICEBLUE}"/>
         </Grid>
+        
         <!--Game Area Right of the Player stats Grid, so message center middle and Location/monster to the right-->
         <Grid Grid.Row="1" Grid.Column="1">
             
@@ -131,20 +134,28 @@
             <!-- This is center middle-->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="320" MinHeight="160" MaxHeight="640"/>
+                    <RowDefinition Height="*" MinHeight="160" MaxHeight="640"/>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="{StaticResource FUSCHIA}" Grid.RowSpan="1" BorderThickness="3,0">
                     <!-- world messages -->
-                    <RichTextBox Grid.Row="0" x:Name="GameMessages" Background="{StaticResource VOID}" Foreground="LimeGreen" VerticalScrollBarVisibility="Auto">
-                        
+                    <RichTextBox Grid.Row="0" x:Name="WorldMessages" Background="{StaticResource VOID}" Foreground="LimeGreen" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0,0,0,4"/>
+                            </Style>
+                        </RichTextBox.Resources>
                     </RichTextBox>
                 </Border>
                 <!-- game battle messages-->
                 <Border BorderBrush="{StaticResource FUSCHIA}" Grid.Row="1" BorderThickness="3,0">
                     <!-- game messages -->
-                    <RichTextBox x:Name="GameBattle" Background="{StaticResource VOID}" Foreground="LimeGreen" VerticalScrollBarVisibility="Auto">
-                        
+                    <RichTextBox x:Name="BattleMessages" Background="{StaticResource VOID}" Foreground="LimeGreen" VerticalScrollBarVisibility="Auto" IsReadOnly="True">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
                     </RichTextBox>
                 </Border>
                 <GridSplitter VerticalAlignment="bottom" HorizontalAlignment="Stretch" Background="{StaticResource FUSCHIA}" ResizeBehavior="BasedOnAlignment" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" ResizeDirection="Rows" Height="3"/>
@@ -156,7 +167,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 2">
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 0, 2 ,0">
                     <!-- Location at the top right-->
                     <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
@@ -165,7 +176,7 @@
                             <RowDefinition Height="*"/>
 
                         </Grid.RowDefinitions>
-                        <Label x:Name="LocationName" Grid.Row="0" Content="{Binding CurrentLocation.Name , FallbackValue='Name'}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code"/>
+                        <Label x:Name="LocationName" Content="{Binding CurrentLocation.Name , FallbackValue='Name'}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code"/>
                         <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MaxWidth="512" MinWidth="128" MaxHeight="512" MinHeight="128" Source="{Binding CurrentLocation.ImageName}" d:Source="pack://application:,,,/Engine;component/Images/Locations/home.jpg" Stretch="Uniform" StretchDirection="Both" Margin="4,0,4,0"/>
                         <Image Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" MaxWidth="512" MinWidth="128" MaxHeight="512" MinHeight="128" Source="{Binding CurrentMonster.ImageName}" d:Source="pack://application:,,,/Engine;component/Images/Monsters/Snake.png" Stretch="Uniform"  Margin="0,0,0,0"/>
                         <Label Grid.Row="2" HorizontalAlignment="Center" Foreground="{StaticResource ALICEBLUE}" FontFamily="Cascadia Code">
@@ -174,7 +185,7 @@
                     </Grid>
                 </Border>
                 <!-- Monster Information-->
-                <Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0,2,0,0">
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0,2,2,0">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -243,9 +254,12 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="1*"/>
+                
             </Grid.RowDefinitions>
             <Button Grid.Row="2" Content="Gain 10 Xp" Click="XPButtonBase_OnClick"/>
         </Grid>
+
+        
         <!--movement bottom Right-->
         <Grid Grid.Row="2" Grid.Column="1" Background="{StaticResource STARK}" >
             <Grid.RowDefinitions>
@@ -256,7 +270,25 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Border BorderBrush="{StaticResource FUSCHIA}" Grid.Column="0"  BorderThickness="3,0"/>
-        <!--Direction movement-->
+            <!--Combat Weapon Pick middle bottom-->
+            <Grid Visibility="{Binding HasMonster, Converter={StaticResource BooleanToVisibility}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <ComboBox ItemsSource="{Binding CurrentPlayer.Weapons}" SelectedItem="{Binding CurrentWeapon}" DisplayMemberPath="Name" SelectedValuePath="ItemTypeID" />
+                <Button Grid.Column="2" Content="Use" Click="OnClick_AttackMonster" />
+
+                <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="&lt;*))))))))))&gt;&lt;"/>
+            </Grid>
+            <!--Direction movement-->
             <Grid x:Name="DirectionGrid" Grid.Column="1" TextBlock.FontSize="14" TextBlock.FontStyle="Italic">
                 
                 <Grid.RowDefinitions>
@@ -272,7 +304,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid.Resources>
-                    <sys:Double x:Key="ButtonWidth">80</sys:Double>
+                    <sys:Double x:Key="ButtonWidth" >80</sys:Double>
                     <sys:Double x:Key="ButtonHeight">36</sys:Double>
                 </Grid.Resources>
 

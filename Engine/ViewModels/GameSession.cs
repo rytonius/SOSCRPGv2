@@ -1,4 +1,5 @@
-﻿using Engine.Factories;
+﻿using Engine.EventArgs;
+using Engine.Factories;
 using Engine.Models;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,16 @@ namespace Engine.ViewModels
 {
     public class GameSession : Notification
     {
-
+        public event EventHandler<WorldMessageEventArgs> OnWorldMessageRaised;
+        public event EventHandler<BattleMessageEventArgs> OnBattleMessageRaised;
+        #region properties
         private Location _currentLocation;
         public World CurrentWorld { get; set; }
         public Player CurrentPlayer { get; set; }
         private Monster _currentMonster;
         public bool HasMonster => CurrentMonster != null;
-        public Location? CurrentLocation
+        public Weapon CurrentWeapon { get; set; }
+        public Location CurrentLocation
         {
             get => _currentLocation;
             set {
@@ -37,7 +41,7 @@ namespace Engine.ViewModels
                 GetMonsterAtLocation();
                 }
         }
-       
+        #endregion
         public GameSession()
         {
             { // start new game, so make a player
@@ -62,12 +66,17 @@ namespace Engine.ViewModels
                     CurrentPlayer.BonusAccuracy += CurrentPlayer.Dexterity;
                     CurrentPlayer.XPtillNextLvl = (int)Math.Round((CurrentPlayer.Level * 40f) * (1.1f), 0);
                 }
+                
+                if (!CurrentPlayer.Weapons.Any())
+                {
+                    CurrentPlayer.AddItemToInventory(ItemFactory.CreateGameItem(1001));
+                }
                 // init world factory and create world
                 CurrentWorld = WorldFactory.CreateWorld();
                 CurrentLocation = CurrentWorld.LocationAt(xCoordinate: 0, yCoordinate: -1, zCoordinate: 0);
 
-                CurrentPlayer.Inventory.Add(ItemFactory.CreateGameItem(1001));
-                CurrentPlayer.Inventory.Add(ItemFactory.CreateGameItem(1002));
+                
+
             }
 
         }
@@ -94,12 +103,47 @@ namespace Engine.ViewModels
                 _currentMonster = value;
                 OnPropertyChanged(nameof(CurrentMonster));
                 OnPropertyChanged(nameof(HasMonster));
+
+                if (CurrentMonster != null)
+                {
+                    WorldMessage($"A wild \"{CurrentMonster.Name}\" has appeared!");
+                }
             }
         }
 
         private void GetMonsterAtLocation()
         {
             CurrentMonster = CurrentLocation.GetMonster();
+        }
+
+        public void AttackCurrentMonster()
+        {
+            if (CurrentWeapon == null)
+            {
+                { BattleMessage("You must select a weapon, to attack."); }
+            }
+            else
+            {
+                // determine damage to monster 
+                int damageToMonster = RandomNumberGen.DiceRollDamageCalculator(CurrentWeapon.Dice, CurrentWeapon.Roll, CurrentPlayer.Attack);
+                int test = RandomNumberGen.NumberBetween(1, 100);
+                BattleMessage($"weapon dice: {CurrentWeapon.Dice}\t weapon roll: {CurrentWeapon.Roll}\ttest: {test}");
+                BattleMessage($"You did {damageToMonster} to {CurrentMonster.Name}");
+                // need to put in accuracy and evasion here
+                CurrentMonster.HitPoints -= damageToMonster;
+            }
+            
+            
+        }
+
+        private void WorldMessage(string message)
+        {
+            OnWorldMessageRaised?.Invoke(this, new WorldMessageEventArgs(message));
+        }
+
+        public void BattleMessage(string message)
+        {
+            OnBattleMessageRaised?.Invoke(this, new BattleMessageEventArgs(message));
         }
         #region MoveMethodsandStuff
         public bool HasLocationToNorth => CurrentWorld.LocationAt(CurrentLocation.XCoordinate, CurrentLocation.YCoordinate +1, CurrentLocation.ZCoordinate) != null;

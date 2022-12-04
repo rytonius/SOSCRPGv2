@@ -14,22 +14,22 @@ namespace Engine.Factories
             switch (monsterID)
             {
                 case 1:
-                    Monster rat = new Monster(name: "this isn't a rat", imageName: "Enemy1.png", maxHitPoints: 5, rewardExperiencePoints: 4, rewardGold: 1);
+                    Monster rat = new Monster(name: "this isn't a rat", imageName: "Enemy1.png", maxHitPoints: 5, diceDamage: 1, rollDamage: 4, bonusDamage: 0, rewardExperiencePoints: 4, rewardGold: 1);
                     AddLootItem(rat, 9001, 75);
                     AddLootItem(rat, 9002, 25);
                     return rat;
                 case 2:
-                    Monster snake = new Monster(name: "Solid Snake", imageName: "Snake.png", maxHitPoints: 8, rewardExperiencePoints: 8, rewardGold: 2);
+                    Monster snake = new Monster(name: "Solid Snake", imageName: "Snake.png", maxHitPoints: 8, diceDamage: 2, rollDamage: 3, bonusDamage: 0, rewardExperiencePoints: 8, rewardGold: 2);
                     AddLootItem(snake, 9003, 75);
                     AddLootItem(snake, 9004, 25);
                     return snake;
                 case 3:
-                    Monster CultistLeader = new Monster(name: "Cultist Leader", imageName: "Cultist_leader.png", maxHitPoints: 16, rewardExperiencePoints: 14, rewardGold: 5);
+                    Monster CultistLeader = new Monster(name: "Cultist Leader", imageName: "Cultist_leader.png", maxHitPoints: 2, diceDamage: 4, rollDamage: 4, bonusDamage: 1, rewardExperiencePoints: 14, rewardGold: 5);
                     AddLootItem(CultistLeader, 9005, 75);
                     AddLootItem(CultistLeader, 9006, 25);
                     return CultistLeader;
                 case 4:
-                    Monster CultistAbomination = new Monster(name: "Cultist Abomination", imageName: "Cult_Abomination1.png", maxHitPoints: 30, rewardExperiencePoints: 30, rewardGold: 15);
+                    Monster CultistAbomination = new Monster(name: "Cultist Abomination", imageName: "Cult_Abomination1.png", maxHitPoints: 30, diceDamage: 2, rollDamage: 8, bonusDamage: 4, rewardExperiencePoints: 30, rewardGold: 15);
                     AddLootItem(CultistAbomination, 9005, 90);
                     AddLootItem(CultistAbomination, 9006, 50);
                     return CultistAbomination;

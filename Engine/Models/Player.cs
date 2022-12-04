@@ -51,17 +51,25 @@ namespace Engine.Models
 
         public string GoldString
         {
-            get { return String.Format("{0:C2}", _gold); }
+            get { return string.Format("{0:C2}", _gold); }
             set { _gold = Convert.ToDecimal(value); }
         }
 
         public ObservableCollection<GameItem> Inventory { get; set; }
         public ObservableCollection<QuestStatus> Quests { get; set; }
 
+        public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
+
         public Player()
         {
             Inventory = new ObservableCollection<GameItem>();
             Quests = new ObservableCollection<QuestStatus>();
+        }
+
+        public void AddItemToInventory(GameItem item)
+        {
+            Inventory.Add(item);
+            OnPropertyChanged(nameof(Weapons));
         }
     }
 
@@ -107,6 +115,7 @@ namespace Engine.Models
 
     }
 
+    
     interface BattleStats
     {
         int HitPoints { get; set; }

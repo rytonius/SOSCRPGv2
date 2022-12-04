@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Engine.EventArgs;
 using Engine.ViewModels;
 using static WPFUI.MainWindow;
 
@@ -34,13 +35,15 @@ namespace WPFUI
         {
             InitializeComponent();
             _gameSession = new GameSession();
+            _gameSession.OnWorldMessageRaised += OnWorldMessageRaised;
+            _gameSession.OnBattleMessageRaised += OnBattleMessageRaised;
             // Data context is a built in property for the xaml window
             DataContext = _gameSession;
             //TestBorder();
             //Startup(); 
         }
 
- 
+    
 
 
         private void XPButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -73,6 +76,18 @@ namespace WPFUI
             _gameSession.MoveDown();
         }
 
+        private void OnWorldMessageRaised(object sender, WorldMessageEventArgs e)
+        {
+            WorldMessages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
+            WorldMessages.ScrollToEnd();
+        }
+
+        private void OnBattleMessageRaised(object sender, BattleMessageEventArgs e)
+        {
+            BattleMessages.Document.Blocks.Add(new Paragraph(new Run(e.Message)));
+            BattleMessages.ScrollToEnd();
+        }
+
         private void FontSizeMethod(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
@@ -85,9 +100,13 @@ namespace WPFUI
             else
             {
                 if (_gameSession.FontSizeLabel > 8)
-                _gameSession.FontSizeLabel -= 1;
+                _gameSession.FontSizeLabel -= 2;
                 //_gameSession.LeftSideGridSize -= 2;
             }
+        }
+
+        private void OnClick_AttackMonster(object sender, RoutedEventArgs e) {
+            _gameSession.AttackCurrentMonster();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -109,6 +128,8 @@ namespace WPFUI
 
             }
         }
+
+
 
         //public void TestBorder()
         //{

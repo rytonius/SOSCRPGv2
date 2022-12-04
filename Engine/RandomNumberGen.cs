@@ -4,16 +4,17 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Engine.ViewModels;
 
 namespace Engine
 {
     public static class RandomNumberGen
     {
-        private static readonly RandomNumberGenerator? _generator;
+        private static RandomNumberGenerator _rng = RandomNumberGenerator.Create();
         public static int NumberBetween(int minimumValue, int maximumValue)
         {
             byte[] randomNumber = new byte[1];
-            _generator?.GetBytes(randomNumber);
+            _rng.GetBytes(randomNumber);
             double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
             // We are using Math.Max, and substracting 0.00000000001,
             // to ensure "multiplier" will always be between 0.0 and .99999999999
@@ -22,8 +23,26 @@ namespace Engine
             // We need to add one to the range, to allow for the rounding done with Math.Floor
             int range = maximumValue - minimumValue + 1;
             double randomValueInRange = Math.Floor(multiplier * range);
+
             return (int)(minimumValue + randomValueInRange);
         }
 
+        public static int DiceRollDamageCalculator(int dice, int roll, int bonusDamage)
+        {
+            int TotalDamage = 0;
+            GameSession GS = new GameSession();
+
+            for (int i = 0; i < dice; i++)
+            {
+                TotalDamage += NumberBetween(1, roll);
+            }
+
+            return TotalDamage + bonusDamage;
+        }
+        
     }
+
 }
+
+    
+
