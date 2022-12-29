@@ -37,7 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto" MinHeight="640" MaxHeight="1225"/>
-            <RowDefinition Height="*" MinHeight="225"/>
+            <RowDefinition Height="*" MinHeight="175" />
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -96,10 +96,12 @@
             <Label Grid.Row="5" Grid.Column="1" Content="{Binding CurrentPlayer.GoldString}" Foreground="{StaticResource ALICEBLUE}"/>
 
             <Label Grid.Row="6" Grid.Column="0" Content="Prinny Stats" Foreground="{StaticResource ALICEBLUE}" HorizontalContentAlignment="Center" Grid.ColumnSpan="2"/>
-            <Label Grid.Row="7" Grid.Column="0" Content="Hit Pts:" Foreground="{StaticResource ALICEBLUE}" ToolTip="Hitpoints = 10 + (Endurance * level * 2)"/>
-            <Label Grid.Row="7" Grid.Column="1" Content="{Binding CurrentPlayer.HitPoints, Converter={StaticResource IntToStringConverterKey}}" Foreground="{StaticResource ALICEBLUE}"/>
+            <Label Grid.Row="7" Grid.Column="0" Content="Hit Points:" Foreground="{StaticResource ALICEBLUE}" ToolTip="Hitpoints = 10 + (Endurance * level * 2)"/>
+            <Label Grid.Row="7" Grid.Column="1" Content="{Binding CurrentPlayer.HitPoints, Converter={StaticResource IntToStringConverterKey}}" Foreground="{StaticResource ALICEBLUE}" d:Content="14"/>
+            <Label Grid.Row="7" Grid.Column="1" Content="{Binding CurrentPlayer.MaxHitPoints, Converter={StaticResource IntToStringConverterKey}}" ContentStringFormat="/   {0}" Foreground="{StaticResource ALICEBLUE}" HorizontalAlignment="Right" d:Content="14" Margin="0,0,10,0"/>
             <Label Grid.Row="8" Grid.Column="0" Content="Stam Pts:" Foreground="{StaticResource ALICEBLUE}" ToolTip="Stamina Points = 10 + (Dex + Str * level)"/>
             <Label Grid.Row="8" Grid.Column="1" Content="{Binding CurrentPlayer.StaminaPoints, Converter={StaticResource IntToStringConverterKey}}" Foreground="{StaticResource ALICEBLUE}"/>
+            <Label Grid.Row="8" Grid.Column="1" Content="{Binding CurrentPlayer.MaxStaminaPoints, Converter={StaticResource IntToStringConverterKey}}" ContentStringFormat="/   {0}" Foreground="{StaticResource ALICEBLUE}" HorizontalAlignment="Right" d:Content="14" Margin="0,0,10,0"/>
             <Label Grid.Row="9" Grid.Column="0" Content="Strength:" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="9" Grid.Column="1" Content="{Binding CurrentPlayer.Strength, Converter={StaticResource IntToStringConverterKey}}" Foreground="{StaticResource ALICEBLUE}"/>
             <Label Grid.Row="10" Grid.Column="0" Content="Dexterity:" Foreground="{StaticResource ALICEBLUE}"/>
@@ -134,8 +136,8 @@
             <!-- This is center middle-->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="320" MinHeight="160" MaxHeight="640"/>
-                    <RowDefinition Height="*" MinHeight="160" MaxHeight="640"/>
+                    <RowDefinition Height="320" MinHeight="240" MaxHeight="640"/>
+                    <RowDefinition Height="320" MinHeight="320" MaxHeight="640"/>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="{StaticResource FUSCHIA}" Grid.RowSpan="1" BorderThickness="3,0">
                     <!-- world messages -->
@@ -283,8 +285,12 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
 
-                <ComboBox ItemsSource="{Binding CurrentPlayer.Weapons}" SelectedItem="{Binding CurrentWeapon}" DisplayMemberPath="Name" SelectedValuePath="ItemTypeID" />
-                <Button Grid.Column="2" Content="Use" Click="OnClick_AttackMonster" />
+                <ComboBox ItemsSource="{Binding CurrentPlayer.Weapons}" SelectedItem="{Binding CurrentWeapon}" DisplayMemberPath="Name" SelectedValuePath="ItemTypeID" IsSynchronizedWithCurrentItem="True" VirtualizingPanel.IsVirtualizing="False"/>
+                <Button Grid.Column="2"  Click="OnClick_AttackMonster" FontStyle="Italic">
+                    <Span>Use
+                        <Run FontWeight="Bold" Text="[Space]" FontStyle="Normal"></Run>
+                    </Span>
+                </Button>
 
                 <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="&lt;*))))))))))&gt;&lt;"/>
             </Grid>
@@ -343,6 +349,7 @@
                     <Span FontWeight="Normal">y: <Run FontWeight="Bold" Text="{Binding CurrentLocation.YCoordinate}"/></Span>
                     <Span FontWeight="Normal">z: <Run FontWeight="Bold" Text="{Binding CurrentLocation.ZCoordinate}"/></Span>
                 </TextBlock>
+                
                 <!-- this is so dumb, has to be a better way to do this -->
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 0, 1, 1" Grid.Column="0" Grid.Row="0" CornerRadius="0, 0, 25, 0"/>
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 0, 0, 1" Grid.Column="1" Grid.Row="0" CornerRadius="0, 0, 25, 25"/>
@@ -353,8 +360,12 @@
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0, 1, 1, 0" Grid.Column="0" Grid.Row="2" CornerRadius="0, 25,0, 0"/>
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="1, 1, 0, 0" Grid.Column="1" Grid.Row="2" CornerRadius="25, 25,0, 0"/>
                 <Border BorderBrush="{StaticResource FUSCHIA}" BorderThickness="0" Grid.Column="2" Grid.Row="2" CornerRadius="25, 0,0, 0" Background="{StaticResource FUSCHIA}"/>
-                
-                
+
+                <Button Grid.Column="2" Height="{StaticResource ButtonHeight}" Width="{StaticResource ButtonWidth}" Margin="10" Click="OnClick_DisplayTradeScreen" Visibility="{Binding HasTrader,Converter={StaticResource BooleanToVisibility}}">
+                    <Span>Trade
+                        <Run FontStyle="Normal" FontWeight="Bold" Text="[T]"/>
+                    </Span>
+                </Button>
             </Grid>
             
         </Grid>

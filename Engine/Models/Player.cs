@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Engine.Models
 {
-    public class Player : Stats, PlayerSpecific
+    public class Player : LivingEntity, PlayerSpecific
     {
 
         int _level;
@@ -19,9 +19,8 @@ namespace Engine.Models
         int _str;
         int _dex;
         int _end;
-        decimal _gold;
+        public double gold;
 
-        public string? Name { get; set; }
         public string? CharacterClass { get; set; }
         public int Level
         {
@@ -51,71 +50,39 @@ namespace Engine.Models
 
         public string GoldString
         {
-            get { return string.Format("{0:C2}", _gold); }
-            set { _gold = Convert.ToDecimal(value); }
+            get { return string.Format("{0:C2}", gold); }
+            set { gold = Convert.ToDouble(value); OnPropertyChanged(nameof(GoldString)); }
         }
 
-        public ObservableCollection<GameItem> Inventory { get; set; }
+       
         public ObservableCollection<QuestStatus> Quests { get; set; }
 
-        public List<GameItem> Weapons => Inventory.Where(i => i is Weapon).ToList();
+
 
         public Player()
         {
-            Inventory = new ObservableCollection<GameItem>();
+            
             Quests = new ObservableCollection<QuestStatus>();
         }
 
-        public void AddItemToInventory(GameItem item)
+
+
+        public bool HasAllTheseItems(List<ItemQuantity> items)
         {
-            Inventory.Add(item);
-            OnPropertyChanged(nameof(Weapons));
+            foreach (ItemQuantity item in items)
+            {
+                if (Inventory.Count(i => i.ItemTypeID == item.ItemID) < item.Quantity)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 
-    public abstract class Stats : Notification, BattleStats
-    {
-        int _hp;
-        int _sp;
-        int _att;
-        int _def;
-        int _ev;
-        int _ba;
-
-        public int HitPoints
-        {
-            get => _hp;
-            set { _hp = value; OnPropertyChanged(nameof(HitPoints)); }
-        }
-        public int StaminaPoints
-        {
-            get => _sp;
-            set { _sp = value; OnPropertyChanged(nameof(StaminaPoints)); }
-        }
-        public int Attack
-        {
-            get => _att;
-            set { _att = value; OnPropertyChanged(nameof(Attack)); }
-        }
-        public int Defense
-        {
-            get => _def;
-            set { _def = value; OnPropertyChanged(nameof(Defense)); }
-        }
-        public int Evade
-        {
-            get => _ev;
-            set { _ev = value; OnPropertyChanged(nameof(Evade)); }
-        }
-        public int BonusAccuracy
-        {
-            get => _ba;
-            set { _ba = value; OnPropertyChanged(nameof(BonusAccuracy)); }
-        }
-
-    }
-
-    
+    // These interfaces are so not needed, I just had learned them so tried it out.  It's prob more important if you have more
+    // than once class that would derive from this.
     interface BattleStats
     {
         int HitPoints { get; set; }
@@ -126,8 +93,7 @@ namespace Engine.Models
         int BonusAccuracy { get; set; }
 
     }
-    // These interfaces are so not needed, I just had learned them so tried it out.  It's prob more important if you have more
-    // than once class that would derive from this.
+
     interface PlayerSpecific
     {
         int Level { get; set; }

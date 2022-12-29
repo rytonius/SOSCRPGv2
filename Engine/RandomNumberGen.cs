@@ -27,6 +27,22 @@ namespace Engine
             return (int)(minimumValue + randomValueInRange);
         }
 
+        public static double CurrencyBetween(double minimumValue, double maximumValue)
+        {
+            byte[] randomNumber = new byte[1];
+            _rng.GetBytes(randomNumber);
+            double asciiValueOfRandomCharacter = Convert.ToDouble(randomNumber[0]);
+            // We are using Math.Max, and substracting 0.00000000001,
+            // to ensure "multiplier" will always be between 0.0 and .99999999999
+            // Otherwise, it's possible for it to be "1", which causes problems in our rounding.
+            double multiplier = Math.Max(0, (asciiValueOfRandomCharacter / 255.0d) - 0.00000000001d);
+            // We need to add one to the range, to allow for the rounding done with Math.Floor
+            double range = maximumValue - minimumValue + 1;
+            double randomValueInRange = Math.Floor(multiplier * range);
+
+            return (double)(minimumValue + randomValueInRange);
+        }
+
         public static int DiceRollDamageCalculator(int dice, int roll, int bonusDamage)
         {
             int TotalDamage = 0;

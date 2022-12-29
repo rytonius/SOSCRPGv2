@@ -19,7 +19,7 @@ namespace Engine.Models
             loc.ZCoordinate = zCoordinate;
             loc.Name = name;
             loc.Description = description;
-            loc.ImageName = imageName;
+            loc.ImageName = $"pack://application:,,,/Engine;component/Images/Locations/{imageName}";
 
             _locations.Add(loc);
         }

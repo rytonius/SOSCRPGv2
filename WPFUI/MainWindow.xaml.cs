@@ -29,12 +29,11 @@ namespace WPFUI
     public partial class MainWindow : Window
     {
 
-        private GameSession _gameSession;
+        private GameSession _gameSession = new GameSession();
 
         public MainWindow()
         {
             InitializeComponent();
-            _gameSession = new GameSession();
             _gameSession.OnWorldMessageRaised += OnWorldMessageRaised;
             _gameSession.OnBattleMessageRaised += OnBattleMessageRaised;
             // Data context is a built in property for the xaml window
@@ -125,10 +124,19 @@ namespace WPFUI
                     break;
                 case Key.Z: _gameSession.MoveDown();
                     break;
+                case Key.Space: _gameSession.AttackCurrentMonster();
+                    break;
 
             }
         }
 
+        private void OnClick_DisplayTradeScreen(object sender, RoutedEventArgs e)
+        {
+            TradeScreen tradeScreen = new TradeScreen();
+            tradeScreen.Owner = this;
+            tradeScreen.DataContext = _gameSession;
+            tradeScreen.ShowDialog();
+        }
 
 
         //public void TestBorder()
