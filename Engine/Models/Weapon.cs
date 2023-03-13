@@ -13,14 +13,15 @@ namespace Engine.Models
         public int Quality { get; set; }
         public Weapon(int itemTypeID, string name, int price, int dice, int roll,
                       string description, int quality)
-            : base(itemTypeID, name, price, description)
+            : base(itemTypeID, name, price, description, isUnique: true)
         {
             Dice = dice;
             Roll = roll;
             Quality = quality;
         }
 
-        public new Weapon Clone()
+        
+        public Weapon Clone()
         {
             return new Weapon(ItemTypeID, Name, Price, Dice, Roll, Description, Quality);
         }

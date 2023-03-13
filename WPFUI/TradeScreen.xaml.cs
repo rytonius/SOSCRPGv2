@@ -32,33 +32,35 @@ namespace WPFUI
 
         private void OnClick_Sell(object sender, RoutedEventArgs e)
         {
-            GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
-
-            if (item != null)
+            GroupedInventoryItem groupedInventoryItem =
+                ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
+            if (groupedInventoryItem != null)
             {
-                Session.CurrencyChange(item.Price);
-
-                Session.CurrentTrader.AddItemToInventory(item);
-                Session.CurrentPlayer.RemoveItemFromInventory(item);
+                double TempGold = groupedInventoryItem.Item.Price;
+                Session.CurrencyChange(TempGold);
+                
+                Session.CurrentTrader.AddItemToInventory(groupedInventoryItem.Item);
+                Session.CurrentPlayer.RemoveItemFromInventory(groupedInventoryItem.Item);
             }
         }
 
         private void OnClick_Buy(object sender, RoutedEventArgs e)
         {
-            GameItem item = ((FrameworkElement)sender).DataContext as GameItem;
-
-            if (Session.CurrentPlayer.gold >= item.Price)
+            GroupedInventoryItem groupedInventoryItem =
+                ((FrameworkElement)sender).DataContext as GroupedInventoryItem;
+            if (groupedInventoryItem != null)
             {
-                _gold = Session.CurrentPlayer.gold;
-                _gold -= item.Price;
-                Session.CurrentPlayer.GoldString = Convert.ToString(_gold);
-
-                Session.CurrentTrader.RemoveItemFromInventory(item);
-                Session.CurrentPlayer.AddItemToInventory(item);
-            }
-            else
-            {
-                MessageBox.Show("You do not have enough gold");
+                if (Session.CurrentPlayer.gold >= groupedInventoryItem.Item.Price)
+                {
+                    double TempGold = groupedInventoryItem.Item.Price * -1;
+                    Session.CurrencyChange(TempGold);
+                    Session.CurrentTrader.RemoveItemFromInventory(groupedInventoryItem.Item);
+                    Session.CurrentPlayer.AddItemToInventory(groupedInventoryItem.Item);
+                }
+                else
+                {
+                    MessageBox.Show("You do not have enough gold");
+                }
             }
         }
 

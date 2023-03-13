@@ -211,7 +211,7 @@
         <Grid Grid.Row="2" Grid.Column="0" Background="{StaticResource FUSCHIA}">
             <TabControl>
                 <TabItem Header="Inventory">
-                    <DataGrid ItemsSource="{Binding CurrentPlayer.Inventory}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" HeadersVisibility="Column">
+                    <DataGrid ItemsSource="{Binding CurrentPlayer.GroupedInventory}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" HeadersVisibility="Column">
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="ToolTip">
@@ -222,8 +222,9 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="Auto"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Item.Name}" Width="*"/>
+                            <DataGridTextColumn Header="QTY" IsReadOnly="True" Width="Auto" Binding="{Binding Quantity}"/>
+                            <DataGridTextColumn Header="Price" Binding="{Binding Item.Price}" Width="Auto"/>
                         </DataGrid.Columns>
                         
                     </DataGrid>
@@ -293,7 +294,10 @@
                 </Button>
 
                 <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="&lt;*))))))))))&gt;&lt;"/>
+
+                
             </Grid>
+                
             <!--Direction movement-->
             <Grid x:Name="DirectionGrid" Grid.Column="1" TextBlock.FontSize="14" TextBlock.FontStyle="Italic">
                 
